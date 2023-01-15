@@ -42,10 +42,10 @@ def download_choice():
   print("\n\t\t\t\t 3. Info")
 
 # Progress bar
-def progress_bar(progress, total):
-  per = 100 * (progress / float(total))
-  bar = ('|' * int(per)) + ('-' * (100 - int(per)))
-  print(f"\r |{bar}| {per:.2f}%", end="\r")
+# def progress_bar(progress, total):
+#   per = 100 * (progress / float(total))
+#   bar = ('|' * int(per)) + ('-' * (100 - int(per)))
+#   print(f"\r |{bar}| {per:.2f}%", end="\r")
 
   #alt 175 till 179
 
@@ -56,10 +56,12 @@ def progress_bar(progress, total):
 def ytdl():
 
   from pytube import YouTube as ytd, Playlist as pld
+  from pytube.cli import on_progress
 
   link = str(input("Enter the link: "))
-  yt = ytd(link)
-  r_time = int(yt.length)
+  yt = ytd(link,on_progress_callback=on_progress)
+  # yt = ytdl(link)
+  # r_time = int(yt.length)
 
   a = int(input("\nThe Link you entered is a: 1.Single Video 2.Playlist: "))
 
@@ -71,17 +73,17 @@ def ytdl():
             rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
             if rel == 1:
                 yt.streams.first().download()
-                progress_bar(0, r_time)
+                # progress_bar(0, r_time)
                 print("\nVideo Successfully Downloaded!!!")
 
             else:
                 yt.streams.last().download()
-                progress_bar(0, r_time)
+                # progress_bar(0, r_time)
                 print("\nVideo Successfully Downloaded!!!")
 
         elif dl == 2:
             yt.streams.filter(only_audio=True, progressive=False).first().download()
-            progress_bar(0, r_time)
+            # progress_bar(0, r_time)
             print("\nAudio Successfully Downloaded!!!")
 
         elif dl == 3:
@@ -89,7 +91,7 @@ def ytdl():
             print("\nAuthor: ", yt.author)
             print("\nPublished date: ", yt.publish_date.strftime("%Y-%m-%d"))
             print("\nNumber of views: ", yt.views)
-            print("\nLength of video: ", r_time, "seconds")
+            # print("\nLength of video: ", r_time, "seconds")
             print("\nThumbnail Link: ", yt.thumbnail_url)
 
         else:
@@ -97,7 +99,7 @@ def ytdl():
 
   #for playlist
   elif a == 2:
-        pl = pld(link)
+        pl = pl(link)
         download_choice()
         dl = int(input("\n: "))
         if dl == 1:
@@ -105,26 +107,26 @@ def ytdl():
           if rel == 1:
             for video in pl.videos:
               video.streams.first().download()
-            progress_bar(0, pl_time)
+            # progress_bar(0, r_time)
             print("\nPlaylist Successfully Downloaded!!!")
 
           else:
             for video in pl.videos:
               video.streams.last().download()
-            progress_bar(0, pl_time)
+            # progress_bar(0, r_time)
             print("\nPlaylist Successfully Downloaded!!!")
 
         elif dl == 2:
           yt.streams.filter(only_audio=True,
                             progressive=False).first().download().all()
-          progress_bar(0, pl_time)
+          # progress_bar(0, r_time)
           print("\nAudios Successfully Downloaded!!!")
 
         elif dl == 3:
           print("\nNumber of videos in playlist: %s" % len(pl.video_urls))
           print("\nAuthor:", yt.author)
           print("\nPublished date:", yt.publish_date.strftime("%Y-%m-%d"))
-          print("\nLength of video:", pl_time, "seconds")
+          # print("\nLength of video:", r_time, "seconds")
 
         else:
           print("Invalid Input")
