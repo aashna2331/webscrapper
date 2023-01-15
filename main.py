@@ -60,8 +60,6 @@ def ytdl():
 
   link = str(input("Enter the link: "))
   yt = ytd(link,on_progress_callback=on_progress)
-  # yt = ytdl(link)
-  # r_time = int(yt.length)
 
   a = int(input("\nThe Link you entered is a: 1.Single Video 2.Playlist: "))
 
@@ -87,12 +85,12 @@ def ytdl():
             print("\nAudio Successfully Downloaded!!!")
 
         elif dl == 3:
-            print("\nTitle: ", yt.title)
-            print("\nAuthor: ", yt.author)
-            print("\nPublished date: ", yt.publish_date.strftime("%Y-%m-%d"))
-            print("\nNumber of views: ", yt.views)
-            # print("\nLength of video: ", r_time, "seconds")
-            print("\nThumbnail Link: ", yt.thumbnail_url)
+            print("Title: ", yt.title)
+            print("Author: ", yt.author)
+            print("Published date: ", yt.publish_date.strftime("%Y-%m-%d"))
+            print("Number of views: ", yt.views)
+            print("Length of video: ", yt.length, "seconds")
+            print("Thumbnail Link: ", yt.thumbnail_url)
 
         else:
            print("Invalid Input")
@@ -117,16 +115,16 @@ def ytdl():
             print("\nPlaylist Successfully Downloaded!!!")
 
         elif dl == 2:
-          yt.streams.filter(only_audio=True,
-                            progressive=False).first().download().all()
+          yt.streams.filter(only_audio=True,progressive=False).first().download().all()
           # progress_bar(0, r_time)
           print("\nAudios Successfully Downloaded!!!")
 
         elif dl == 3:
-          print("\nNumber of videos in playlist: %s" % len(pl.video_urls))
-          print("\nAuthor:", yt.author)
-          print("\nPublished date:", yt.publish_date.strftime("%Y-%m-%d"))
-          # print("\nLength of video:", r_time, "seconds")
+          print("Number of videos in playlist: %s" % len(pl.video_urls))
+          print("Author:", yt.author)
+          print("Published date:", yt.publish_date.strftime("%Y-%m-%d"))
+          print("Number of views: ", yt.views)
+          print("Thumbnail Link: ", yt.thumbnail_url)
 
         else:
           print("Invalid Input")
@@ -144,8 +142,8 @@ def imdb():
 
   from PyMovieDb import IMDB as ia
 
-  na = str(input("\nEnter the name of movie/series you want info about:"))
-  res = ia.search(name = na)
+  name = str(input("\nEnter the name of movie/series you want info about:"))
+  res = ia.search(name)
 
   id = int(
     input("\n Which One? Copy paste the exact \"id\" from above list:\n"))
