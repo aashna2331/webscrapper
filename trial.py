@@ -154,3 +154,34 @@ main_display()
 
 #https://www.instagram.com/eel/CYa0KIwtjjL/?utm_medium=share_sheet
 #indian.tweets
+
+
+
+
+
+
+
+def progress_bar(progress,total):
+  per = 100 * (progress/float(total))
+  bar = '*' * int(per) + '-' * (100-int(per))
+  print(f"\r |{bar}| {per:.2f}%", end="\r")
+       
+from pytube import YouTube as ytd
+
+link = str(input("Enter the link: "))
+yt = ytd(link)
+
+import asyncio
+
+async def dl():
+   yt.streams.first().download()
+
+async def pb():
+   for i in range(0,100):
+    progress_bar(i,)
+
+if __name__ == "__main__":
+   loop = asyncio.get_event_loop()
+   loop.run_until_complete(asyncio.gather(dl(), pb()))
+
+print("\nVideo Successfully Downloaded!!!")
