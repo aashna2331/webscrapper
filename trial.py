@@ -42,10 +42,10 @@ def download_choice():
   print("\n\t\t\t\t 3. Info")
 
 # Progress bar
-# def progress_bar(progress, total):
-#   per = 100 * (progress / float(total))
-#   bar = ('|' * int(per)) + ('-' * (100 - int(per)))
-#   print(f"\r |{bar}| {per:.2f}%", end="\r")
+def progress_bar(progress, total):
+  per = 100 * (progress / float(total))
+  bar = ('*' * int(per)) + ('-' * (100 - int(per)))
+  print(f"\r |{bar}| {per:.2f}%", end="\r")
 
   #alt 175 till 179
 
@@ -134,8 +134,19 @@ def ytdl():
 
 # Insta Downloader
 def igdl():
+  from instaloader import Instaloader as ig
 
-  link = str(input("Enter the link: "))
+  choice = int(input("what do you want to download: 1. Profile Pic 2. IGTV"))
+  link = str(input("Enter the username/link: "))
+
+  if choice==1:
+    print(ig.download_profile(link,profile_pic_only=True))
+
+  elif choice ==2:
+      print(ig.download_igtv(self, profile= link))
+
+  else:
+      print()
 
 # IMDb Scrapper
 def imdb():

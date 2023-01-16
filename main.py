@@ -44,7 +44,7 @@ def download_choice():
 # Progress bar
 # def progress_bar(progress, total):
 #   per = 100 * (progress / float(total))
-#   bar = ('|' * int(per)) + ('-' * (100 - int(per)))
+#   bar = ('*' * int(per)) + ('-' * (100 - int(per)))
 #   print(f"\r |{bar}| {per:.2f}%", end="\r")
 
   #alt 175 till 179
