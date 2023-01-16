@@ -168,16 +168,7 @@ main_display()
 #indian.tweets
 
 
-#Syncing download n progress bar
-def progress_bar(progress,total):
-  per = 100 * (progress/float(total))
-  bar = '*' * int(per) + '-' * (100-int(per))
-  print(f"\r |{bar}| {per:.2f}%", end="\r")
-       
-from pytube import YouTube as ytd
-
-link = str(input("Enter the link: "))
-yt = ytd(link)
+#Syncing download n progress bar       
 
 import asyncio
 
