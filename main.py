@@ -67,7 +67,7 @@ def ytdl():
   if (a == 1):
         download_choice()
         dl = int(input("\n: "))
-        if (dl == 1:
+        if (dl == 1):
             rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
             if (rel == 1):
                 yt.streams.first().download()
