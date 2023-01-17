@@ -64,12 +64,12 @@ def ytdl():
   a = int(input("\nThe Link you entered is a: 1.Single Video 2.Playlist: "))
 
   #for video
-  if a == 1:
+  if (a == 1):
         download_choice()
         dl = int(input("\n: "))
-        if dl == 1:
+        if (dl == 1:
             rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
-            if rel == 1:
+            if (rel == 1):
                 yt.streams.first().download()
                 # progress_bar(0, r_time)
                 print("\nVideo Successfully Downloaded!!!")
@@ -79,12 +79,12 @@ def ytdl():
                 # progress_bar(0, r_time)
                 print("\nVideo Successfully Downloaded!!!")
 
-        elif dl == 2:
+        elif (dl == 2):
             yt.streams.filter(only_audio=True, progressive=False).first().download()
             # progress_bar(0, r_time)
             print("\nAudio Successfully Downloaded!!!")
 
-        elif dl == 3:
+        elif (dl == 3):
             print("Title: ", yt.title)
             print("Author: ", yt.author)
             print("Published date: ", yt.publish_date.strftime("%Y-%m-%d"))
@@ -96,13 +96,13 @@ def ytdl():
            print("Invalid Input")
 
   #for playlist
-  elif a == 2:
+  elif (a == 2):
         pl = pl(link)
         download_choice()
         dl = int(input("\n: "))
-        if dl == 1:
+        if (dl == 1):
           rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
-          if rel == 1:
+          if (rel == 1):
             for video in pl.videos:
               video.streams.first().download()
             # progress_bar(0, r_time)
@@ -114,12 +114,12 @@ def ytdl():
             # progress_bar(0, r_time)
             print("\nPlaylist Successfully Downloaded!!!")
 
-        elif dl == 2:
+        elif (dl == 2):
           yt.streams.filter(only_audio=True,progressive=False).first().download().all()
           # progress_bar(0, r_time)
           print("\nAudios Successfully Downloaded!!!")
 
-        elif dl == 3:
+        elif (dl == 3):
           print("Number of videos in playlist: %s" % len(pl.video_urls))
           print("Author:", yt.author)
           print("Published date:", yt.publish_date.strftime("%Y-%m-%d"))
