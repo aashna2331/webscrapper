@@ -17,15 +17,15 @@ def main_display():
 
   choice = int(input("Enter your choice: "))
 
-  if choice == 1:
+  if (choice == 1):
     print("YouTube Downloader Activated!")
     ytdl()
 
-  elif choice == 2:
+  elif (choice == 2):
     print("Instagram Downloader Activated!")
     igdl()
 
-  elif choice == 3:
+  elif (choice == 3):
     print("IMDb Servers loading...")
     imdb()
 
