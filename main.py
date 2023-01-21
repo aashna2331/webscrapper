@@ -111,12 +111,17 @@ def ytdl():
 # Insta Downloader
 def igdl():
   from instaloader import Instaloader as ig
+  from pathlib import Path
 
-  dp = input("Enter Insta username : ")
-  print("Downloading media...")
-  ig.download_profile(dp , profile_pic_only=True)
-  print("Download complete")
-  
+# Only for dl pfp
+  try:
+    profile = input("Enter profile name : ")
+    print("Downloading media...")
+    ig.download_profile(profile,profile_pic_only=False)
+    print("Download compltete")
+  except Exception as e:
+    print()
+
 # IMDb Scrapper
 def imdb():
   from PyMovieDb import IMDB as ia
