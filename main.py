@@ -9,6 +9,7 @@ instalation using pip
 
 #Function for Display  
 def main_display():
+  print("\n")
   print(" \t\t********************************************")
   print("\t\t   What type of action you want to execute")
   print(" \t\t********************************************")
@@ -35,6 +36,7 @@ def main_display():
 
 # For Download Choice
 def download_choice():
+  print("\n")
   print(" \t\t****************************************")
   print("\t\t    What do you want me to download")
   print(" \t\t****************************************")
@@ -44,7 +46,6 @@ def download_choice():
 
 # YouTube Downloder
 def ytdl():
-
   from pytube import YouTube as ytd, Playlist as pld
   from pytube.cli import on_progress
 
@@ -108,8 +109,8 @@ def ytdl():
       print("Invalid Input")
 
 # Insta Downloader
-from instaloader import Instaloader as ig
 def igdl():
+  from instaloader import Instaloader as ig
 
   dp = input("Enter Insta username : ")
   print("Downloading media...")
@@ -118,12 +119,10 @@ def igdl():
   
 # IMDb Scrapper
 def imdb():
-
   from PyMovieDb import IMDB as ia
 
   name = str(input("\nEnter the name of movie/series you want info about:"))
   res = ia.search(name)
-
   id = int(input("\n Which One? Copy paste the exact \"id\" from above list:\n"))
   print(ia.get_by_id(id))
 
