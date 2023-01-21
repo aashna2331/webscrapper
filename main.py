@@ -2,11 +2,12 @@
 Prerequisites:
 instalation using pip
     pytube
+    instaloader
     PyMovieDb
 
 """
 
-
+#Function for Display  
 def main_display():
   print(" \t\t********************************************")
   print("\t\t   What type of action you want to execute")
@@ -32,7 +33,7 @@ def main_display():
   else:
     print("Invalid Input")
 
-
+# For Download Choice
 def download_choice():
   print(" \t\t****************************************")
   print("\t\t    What do you want me to download")
@@ -41,18 +42,7 @@ def download_choice():
   print("\n\t\t\t\t 2. Audio")
   print("\n\t\t\t\t 3. Info")
 
-# Progress bar
-# def progress_bar(progress, total):
-#   per = 100 * (progress / float(total))
-#   bar = ('*' * int(per)) + ('-' * (100 - int(per)))
-#   print(f"\r |{bar}| {per:.2f}%", end="\r")
-
-  #alt 175 till 179
-
-
 # YouTube Downloder
-
-
 def ytdl():
 
   from pytube import YouTube as ytd, Playlist as pld
@@ -60,83 +50,72 @@ def ytdl():
 
   link = str(input("Enter the link: "))
   yt = ytd(link,on_progress_callback=on_progress)
+  pl = pld(link)
 
-  a = int(input("\nThe Link you entered is a: 1.Single Video 2.Playlist: "))
+  a = int(input("The Link you entered is a:- 1.Single Video 2.Playlist: "))
+  download_choice()
+  dl = int(input("\t: "))
 
   #for video
-  if (a == 1):
-        download_choice()
-        dl = int(input("\n: "))
-        if (dl == 1):
-            rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
-            if (rel == 1):
-                yt.streams.first().download()
-                # progress_bar(0, r_time)
-                print("\nVideo Successfully Downloaded!!!")
-
-            else:
-                yt.streams.last().download()
-                # progress_bar(0, r_time)
-                print("\nVideo Successfully Downloaded!!!")
-
-        elif (dl == 2):
-            yt.streams.filter(only_audio=True, progressive=False).first().download()
-            # progress_bar(0, r_time)
-            print("\nAudio Successfully Downloaded!!!")
-
-        elif (dl == 3):
-            print("Title: ", yt.title)
-            print("Author: ", yt.author)
-            print("Published date: ", yt.publish_date.strftime("%Y-%m-%d"))
-            print("Number of views: ", yt.views)
-            print("Length of video: ", yt.length, "seconds")
-            print("Thumbnail Link: ", yt.thumbnail_url)
+  if (a == 1 and dl == 1):
+        rel = input("\nEnter the Resolution you need:- 1.High 2.Low: ")
+        if (rel == 1):
+          yt.streams.filter(resolution= "720p", subtype= ".mkv").first().download()
+          print("\nVideo Successfully Downloaded!!!")
 
         else:
-           print("Invalid Input")
+          yt.streams.last().download()
+          print("\nVideo Successfully Downloaded!!!")
+
+  elif (a == 1 and dl == 2):
+        yt.streams.filter(only_audio=True, progressive=False).first().download()
+        print("\nAudio Successfully Downloaded!!!")
+
+  elif (a == 1 and dl == 3):
+        print("Title: ", yt.title)
+        print("Author: ", yt.author)
+        print("Published date: ", yt.publish_date.strftime("%Y-%m-%d"))
+        print("Number of views: ", yt.views)
+        print("Length of video: ", yt.length, "seconds")
+        print("Thumbnail Link: ", yt.thumbnail_url)
 
   #for playlist
-  elif (a == 2):
-        pl = pl(link)
-        download_choice()
-        dl = int(input("\n: "))
-        if (dl == 1):
-          rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
-          if (rel == 1):
-            for video in pl.videos:
-              video.streams.first().download()
-            # progress_bar(0, r_time)
-            print("\nPlaylist Successfully Downloaded!!!")
-
-          else:
-            for video in pl.videos:
-              video.streams.last().download()
-            # progress_bar(0, r_time)
-            print("\nPlaylist Successfully Downloaded!!!")
-
-        elif (dl == 2):
-          yt.streams.filter(only_audio=True,progressive=False).first().download().all()
-          # progress_bar(0, r_time)
-          print("\nAudios Successfully Downloaded!!!")
-
-        elif (dl == 3):
-          print("Number of videos in playlist: %s" % len(pl.video_urls))
-          print("Author:", yt.author)
-          print("Published date:", yt.publish_date.strftime("%Y-%m-%d"))
-          print("Number of views: ", yt.views)
-          print("Thumbnail Link: ", yt.thumbnail_url)
+  elif (a == 2 and dl == 1):
+   
+        rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
+        if (rel == 1):
+          for video in pl.videos:
+            video.streams.first().download()
+          print("\nPlaylist Successfully Downloaded!!!")
 
         else:
-          print("Invalid Input")
+          for video in pl.videos:
+            video.streams.last().download()
+          print("\nPlaylist Successfully Downloaded!!!")
+
+  elif (a == 2 and dl == 2):
+        yt.streams.filter(only_audio=True,progressive=False).first().download().all()
+        print("\nAudios Successfully Downloaded!!!")
+
+  elif (a == 2 and dl == 3):
+        print("Number of videos in playlist: %s" % len(pl.video_urls))
+        print("Author:", yt.author)
+        print("Published date:", yt.publish_date.strftime("%Y-%m-%d"))
+        print("Number of views: ", yt.views)
+        print("Thumbnail Link: ", yt.thumbnail_url)
+
   else:
       print("Invalid Input")
 
-
 # Insta Downloader
+from instaloader import Instaloader as ig
 def igdl():
 
-  link = str(input("Enter the link: "))
-
+  dp = input("Enter Insta username : ")
+  print("Downloading media...")
+  ig.download_profile(dp , profile_pic_only=True)
+  print("Download complete")
+  
 # IMDb Scrapper
 def imdb():
 
@@ -145,13 +124,7 @@ def imdb():
   name = str(input("\nEnter the name of movie/series you want info about:"))
   res = ia.search(name)
 
-  id = int(
-    input("\n Which One? Copy paste the exact \"id\" from above list:\n"))
+  id = int(input("\n Which One? Copy paste the exact \"id\" from above list:\n"))
   print(ia.get_by_id(id))
 
 main_display()
-
-
-
-#https://www.instagram.com/eel/CYa0KIwtjjL/?utm_medium=share_sheet
-#indian.tweets
