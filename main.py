@@ -49,7 +49,7 @@ def ytdl():
   from pytube import YouTube as ytd, Playlist as pld
   from pytube.cli import on_progress
 
-  link = str(input("Enter the link: "))
+  link = input("Enter the link: ")
   yt = ytd(link,on_progress_callback=on_progress)
   pl = pld(link)
 
@@ -59,51 +59,50 @@ def ytdl():
 
   #for video
   if (a == 1 and dl == 1):
-        rel = input("\nEnter the Resolution you need:- 1.High 2.Low: ")
-        if (rel == 1):
-          yt.streams.filter(resolution= "720p", subtype= ".mkv").first().download()
-          print("\nVideo Successfully Downloaded!!!")
+      rel = int(input("\nEnter the Resolution you need:- 1.High 2.Low: "))
+      if (rel == 1):
+        yt.streams.filter(resolution= "720p", subtype= ".mkv").first().download()
+        print("\nVideo Successfully Downloaded!!!")
 
-        else:
-          yt.streams.last().download()
-          print("\nVideo Successfully Downloaded!!!")
+      else:
+        yt.streams.last().download()
+        print("\nVideo Successfully Downloaded!!!")
 
   elif (a == 1 and dl == 2):
-        yt.streams.filter(only_audio=True, progressive=False).first().download()
-        print("\nAudio Successfully Downloaded!!!")
+      yt.streams.filter(only_audio=True, progressive=False).first().download()
+      print("\nAudio Successfully Downloaded!!!")
 
   elif (a == 1 and dl == 3):
-        print("Title: ", yt.title)
-        print("Author: ", yt.author)
-        print("Published date: ", yt.publish_date.strftime("%Y-%m-%d"))
-        print("Number of views: ", yt.views)
-        print("Length of video: ", yt.length, "seconds")
-        print("Thumbnail Link: ", yt.thumbnail_url)
+      print("Title: ", yt.title)
+      print("Author: ", yt.author)
+      print("Published date: ", yt.publish_date.strftime("%Y-%m-%d"))
+      print("Number of views: ", yt.views)
+      print("Length of video: ", yt.length, "seconds")
+      print("Thumbnail Link: ", yt.thumbnail_url)
 
   #for playlist
   elif (a == 2 and dl == 1):
-   
-        rel = input("\nEnter the Resolution you need: 1.High 2.Low: \n")
-        if (rel == 1):
-          for video in pl.videos:
-            video.streams.first().download()
-          print("\nPlaylist Successfully Downloaded!!!")
+      rel = int(input("\nEnter the Resolution you need: 1.High 2.Low: \n"))
+      if (rel == 1):
+        for video in pl.videos:
+          video.streams.first().download()
+        print("\nPlaylist Successfully Downloaded!!!")
 
-        else:
-          for video in pl.videos:
-            video.streams.last().download()
-          print("\nPlaylist Successfully Downloaded!!!")
+      else:
+        for video in pl.videos:
+          video.streams.last().download()
+        print("\nPlaylist Successfully Downloaded!!!")
 
   elif (a == 2 and dl == 2):
-        yt.streams.filter(only_audio=True,progressive=False).first().download().all()
-        print("\nAudios Successfully Downloaded!!!")
+      yt.streams.filter(only_audio=True,progressive=False).first().download().all()
+      print("\nAudios Successfully Downloaded!!!")
 
   elif (a == 2 and dl == 3):
-        print("Number of videos in playlist: %s" % len(pl.video_urls))
-        print("Author:", yt.author)
-        print("Published date:", yt.publish_date.strftime("%Y-%m-%d"))
-        print("Number of views: ", yt.views)
-        print("Thumbnail Link: ", yt.thumbnail_url)
+      print("Number of videos in playlist: %s" % len(pl.video_urls))
+      print("Author:", yt.author)
+      print("Published date:", yt.publish_date.strftime("%Y-%m-%d"))
+      print("Number of views: ", yt.views)
+      print("Thumbnail Link: ", yt.thumbnail_url)
 
   else:
       print("Invalid Input")
@@ -115,10 +114,10 @@ def igdl():
 
 # Only for dl pfp
   try:
-    profile = input("Enter profile name : ")
+    id = input("Enter profile name : ")
     print("Downloading media...")
-    ig.download_profile(profile,profile_pic_only=False)
-    print("Download compltete")
+    ig.download_profile(id,profile_pic_only=False)
+    print("Download complete!")
   except Exception as e:
     print()
 
@@ -126,7 +125,7 @@ def igdl():
 def imdb():
   from PyMovieDb import IMDB as ia
 
-  name = str(input("\nEnter the name of movie/series you want info about:"))
+  name = input("\nEnter the name of movie/series you want info about:")
   res = ia.search(name)
   id = int(input("\n Which One? Copy paste the exact \"id\" from above list:\n"))
   print(ia.get_by_id(id))
